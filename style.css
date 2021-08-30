@@ -9,6 +9,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(#ffc38c, #ff9b40);
+    background: linear-gradient(to right,#000 50%, #FFF 45%);
+    
 
+    /*
+    
+    background: radial-gradient(#ffc38c, #ff9b40);
+    
+
+        ctx.fillStyle = '#8C5523';
+        ctx.fill();
+    */
 }
+

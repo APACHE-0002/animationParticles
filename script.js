@@ -33,8 +33,15 @@ class Particle{
     draw(){
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = '#8C5523';
-        ctx.fill();
+        if(this.x < 750){
+            ctx.fillStyle = '#FFF';
+            ctx.fill();
+            }
+            if(this.x > 750){
+                ctx.fillStyle = '#000';
+                ctx.fill();
+            }
+        
     }
     //check particle position, check mouse position, 
     //move the particle, draw the particle
@@ -77,13 +84,15 @@ class Particle{
 function init(){
     particlesArray = [];
     let numberOfParticles = (canvas.height * canvas.width) / 9000;
-    for(let i = 0; i < numberOfParticles*0.5; i++){
+    for(let i = 0; i < numberOfParticles*1; i++){
         let size = (Math.random() * 5) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
         let directionX = (Math.random() * 5) - 2.5;
         let directionY = (Math.random() * 5) - 2.5;
         let color = '#8C5523';
+
+
 
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
@@ -99,12 +108,23 @@ function connect(){
             + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
             if(distance < (canvas.width/7) * (canvas.height/7)) {
                 opacityValue = 1 - (distance/20000);
-                ctx.strokeStyle = 'rgba(140,85,31,' + opacityValue + ')';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                ctx.stroke();
+                if(particlesArray[a].x < 750){
+                    ctx.strokeStyle = 'rgba(255,255,255,' + opacityValue + ')';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                    ctx.stroke();
+                }
+                if(particlesArray[a].x > 750){
+                    ctx.strokeStyle = 'rgba(0,0,0,' + opacityValue + ')';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                    ctx.stroke();
+                }
+                
             }
         } 
     }
